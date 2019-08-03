@@ -32,4 +32,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Firebase dependencies
+    implementation "com.google.firebase:firebase-analytics:$firebase_analytics"
+    implementation "com.google.firebase:firebase-auth:$firebase_auth"
+    implementation "com.firebaseui:firebase-ui-auth:$auth_ui"
+    implementation "com.google.firebase:firebase-firestore:$firestore_version"
+
 }
+apply plugin: 'com.google.gms.google-services'
