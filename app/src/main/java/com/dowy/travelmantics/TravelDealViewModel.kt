@@ -10,6 +10,9 @@ class TravelDealViewModel : ViewModel() {
 
     private val repository = TravelDealRepository()
     private val travelDeals = MutableLiveData<List<TravelDeal>>()
+    private val _logMsg = MutableLiveData<String>()
+    val logMsg: LiveData<String>
+        get() = _logMsg
 
     /**
      * Save Data on Firestore
@@ -17,6 +20,8 @@ class TravelDealViewModel : ViewModel() {
     fun saveTravelDeal(travelDeal: TravelDeal) {
         repository.saveTravelDeal(travelDeal).addOnFailureListener {
             Log.d(VIEWMODEL_TAG, "Error saving TravelDeal: $it")
+        }.addOnSuccessListener {
+            _logMsg.value = "Travel Deal Saved!"
         }
     }
 
@@ -49,6 +54,8 @@ class TravelDealViewModel : ViewModel() {
     fun updateTravelDeal(travelDeal: TravelDeal) {
         repository.updateTravelDeal(travelDeal).addOnFailureListener {
             Log.d(VIEWMODEL_TAG, "Error updating TravelDeal: $it")
+        }.addOnSuccessListener {
+            _logMsg.value = "Travel Deal Updated!"
         }
     }
 
@@ -58,6 +65,9 @@ class TravelDealViewModel : ViewModel() {
     fun deleteTravelDeal(travelDeal: TravelDeal) {
         repository.deleteTravelDeal(travelDeal).addOnFailureListener {
             Log.d(VIEWMODEL_TAG, "Error deleting TravelDeal: $it")
+        }.addOnSuccessListener {
+
+            _logMsg.value = "${travelDeal.title} deleted!"
         }
 
     }

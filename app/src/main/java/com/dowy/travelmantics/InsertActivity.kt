@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_insert.*
 
@@ -54,6 +55,7 @@ class InsertActivity : AppCompatActivity() {
             Toast.makeText(this, "You have to save the deal before deleting!", Toast.LENGTH_SHORT).show()
         } else {
             viewModel.deleteTravelDeal(travelDeal)
+            mostrarMsg()
             finish()
         }
 
@@ -63,22 +65,23 @@ class InsertActivity : AppCompatActivity() {
         travelDeal.title = input_title.text.toString().trim()
         travelDeal.price = input_price.text.toString().trim()
         travelDeal.description = input_description.text.toString().trim()
+        travelDeal.filter_title = travelDeal.title.toLowerCase()
 
         if (travelDeal.id == null || travelDeal.id.equals("")) {
             viewModel.saveTravelDeal(travelDeal)
+            mostrarMsg()
             finish()
         } else {
             viewModel.updateTravelDeal(travelDeal)
+            mostrarMsg()
             finish()
         }
-        cleanFields()
     }
 
-    private fun cleanFields() {
-        input_title.text?.clear()
-        input_title.requestFocus()
-        input_price.text?.clear()
-        input_description.text?.clear()
+    private fun mostrarMsg() {
+        viewModel.logMsg.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
     }
 
 }

@@ -5,6 +5,7 @@ import java.io.Serializable
 
 data class TravelDeal(
     var title: String,
+    var filter_title: String,
     var description: String,
     var price: String,
     var imageUrl: String
@@ -16,5 +17,5 @@ data class TravelDeal(
                 field = value
         }
 
-    constructor() : this("", "", "", "")
+    constructor() : this("", "", "", "","")
 }

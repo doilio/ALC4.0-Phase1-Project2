@@ -1,10 +1,7 @@
 package com.dowy.travelmantics
 
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 
 class TravelDealRepository {
@@ -18,8 +15,8 @@ class TravelDealRepository {
         return travelDealRef.add(travelDeal)
     }
 
-    fun readTravelDeals(): CollectionReference {
-        return firebaseDB.collection(TRAVEL_DEALS)
+    fun readTravelDeals(): Query {
+        return firebaseDB.collection(TRAVEL_DEALS).orderBy(FILTER_TITLE)
     }
 
     fun updateTravelDeal(travelDeal: TravelDeal): Task<Void> {
