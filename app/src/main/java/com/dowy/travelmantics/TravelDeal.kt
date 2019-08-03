@@ -6,5 +6,12 @@ data class TravelDeal(
     val price: String,
     val imageUrl: String
 ){
-    val id: String = ""
+
+    var id: String = ""
+        set(value) {
+            if (value != "")
+                field = value
+        }
+
+constructor(): this("","","","")
 }
