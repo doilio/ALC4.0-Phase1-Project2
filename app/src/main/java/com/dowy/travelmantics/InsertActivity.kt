@@ -4,20 +4,32 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_insert.*
 
 class InsertActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TravelDealViewModel
+    private lateinit var travelDeal: TravelDeal
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insert)
-
+        supportActionBar!!.title = "Insert Travel Deal"
         viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
+        val intent = intent.getSerializableExtra(SELECTED_DEAL)
+        if (intent != null) {
+             travelDeal = intent as TravelDeal
+
+            supportActionBar!!.title = "Update Travel Deal"
+            input_title.setText(travelDeal.title)
+            input_price.setText(travelDeal.price)
+            input_description.setText(travelDeal.description)
+        }else{
+            travelDeal = TravelDeal()
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -35,12 +47,15 @@ class InsertActivity : AppCompatActivity() {
     }
 
     private fun saveDeal() {
-        val title = input_title.text.toString().trim()
-        val price = input_price.text.toString().trim()
-        val description = input_description.text.toString().trim()
+        travelDeal.title = input_title.text.toString().trim()
+        travelDeal.price = input_price.text.toString().trim()
+        travelDeal.description = input_description.text.toString().trim()
 
-        val travelDeal = TravelDeal(title, description, price, "")
-        viewModel.saveTravelDeal(travelDeal)
+        if (travelDeal.id == null || travelDeal.id.equals("")) {
+            viewModel.saveTravelDeal(travelDeal)
+        } else {
+            viewModel.updateTravelDeal(travelDeal)
+        }
         cleanFields()
     }
 

@@ -16,7 +16,7 @@ class TravelDealViewModel : ViewModel() {
      */
     fun saveTravelDeal(travelDeal: TravelDeal) {
         repository.saveTravelDeal(travelDeal).addOnFailureListener {
-            Log.d(VIEWMODEL_TAG, "Error saving TravelDeal")
+            Log.d(VIEWMODEL_TAG, "Error saving TravelDeal: $it")
         }
     }
 
@@ -27,7 +27,7 @@ class TravelDealViewModel : ViewModel() {
         repository.readTravelDeals().addSnapshotListener { querySnapshot, firebaseFirestoreException ->
 
             if (firebaseFirestoreException != null) {
-                Log.d(VIEWMODEL_TAG, "Error reading TravelDeal")
+                Log.d(VIEWMODEL_TAG, "Error reading TravelDeal $firebaseFirestoreException")
                 travelDeals.value = null
             }
 
@@ -41,6 +41,15 @@ class TravelDealViewModel : ViewModel() {
 
         }
         return travelDeals
+    }
+
+    /**
+     * Update TravelDeal
+     */
+    fun updateTravelDeal(travelDeal: TravelDeal) {
+        repository.updateTravelDeal(travelDeal).addOnFailureListener {
+            Log.d(VIEWMODEL_TAG, "Error updating TravelDeal: $it")
+        }
     }
 }
 
