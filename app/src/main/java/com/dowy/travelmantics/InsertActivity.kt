@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_insert.*
 
@@ -20,13 +21,13 @@ class InsertActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
         val intent = intent.getSerializableExtra(SELECTED_DEAL)
         if (intent != null) {
-             travelDeal = intent as TravelDeal
+            travelDeal = intent as TravelDeal
 
             supportActionBar!!.title = "Update Travel Deal"
             input_title.setText(travelDeal.title)
             input_price.setText(travelDeal.price)
             input_description.setText(travelDeal.description)
-        }else{
+        } else {
             travelDeal = TravelDeal()
         }
 
@@ -42,8 +43,20 @@ class InsertActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.save_menu ->
                 saveDeal()
+            R.id.delete_deal ->
+                deleteDeal()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteDeal() {
+        if (travelDeal.id == null || travelDeal.id.equals("")) {
+            Toast.makeText(this, "You have to save the deal before deleting!", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.deleteTravelDeal(travelDeal)
+            finish()
+        }
+
     }
 
     private fun saveDeal() {
@@ -53,8 +66,10 @@ class InsertActivity : AppCompatActivity() {
 
         if (travelDeal.id == null || travelDeal.id.equals("")) {
             viewModel.saveTravelDeal(travelDeal)
+            finish()
         } else {
             viewModel.updateTravelDeal(travelDeal)
+            finish()
         }
         cleanFields()
     }

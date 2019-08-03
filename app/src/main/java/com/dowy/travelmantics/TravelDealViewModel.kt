@@ -51,6 +51,16 @@ class TravelDealViewModel : ViewModel() {
             Log.d(VIEWMODEL_TAG, "Error updating TravelDeal: $it")
         }
     }
+
+    /**
+     * Delete TravelDeal
+     */
+    fun deleteTravelDeal(travelDeal: TravelDeal) {
+        repository.deleteTravelDeal(travelDeal).addOnFailureListener {
+            Log.d(VIEWMODEL_TAG, "Error deleting TravelDeal: $it")
+        }
+
+    }
 }
 
 

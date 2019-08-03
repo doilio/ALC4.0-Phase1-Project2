@@ -29,8 +29,11 @@ class TravelDealRepository {
         return travelDealRef.set(travelDeal, SetOptions.merge())
     }
 
-    fun deleteTravelDeal() {
+    fun deleteTravelDeal(travelDeal: TravelDeal): Task<Void> {
+        val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
+            .document(travelDeal.id!!)
 
+       return travelDealRef.delete()
     }
 
     fun deleteTravelDealImage() {
