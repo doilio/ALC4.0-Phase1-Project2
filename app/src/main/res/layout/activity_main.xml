@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   tools:context=".MainActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_deals"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/spacingZero"
+        android:layout_height="@dimen/spacingZero"
         android:fitsSystemWindows="true"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,9 +22,9 @@
     <ImageView
         android:id="@+id/image_empty"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="@dimen/spaceBig"
+        android:layout_marginStart="@dimen/spacingSmall"
+        android:layout_marginEnd="@dimen/spacingSmall"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@+id/text_empty"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,19 +33,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/empty_travel"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/empty_image"
         android:visibility="gone"/>
 
     <TextView
         android:id="@+id/text_empty"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/spacingZero"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Travel Deal list is currently empty, "
+        android:layout_marginStart="@dimen/spacingSmall"
+        android:layout_marginEnd="@dimen/spacingSmall"
+        android:layout_marginTop="@dimen/spacingSmall"
+        android:text="@string/travel_deal_list_is_currently_empty"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="@dimen/textRegular"
         android:visibility="gone"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"

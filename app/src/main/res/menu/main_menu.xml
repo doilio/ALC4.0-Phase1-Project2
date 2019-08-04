@@ -5,11 +5,11 @@
     <item
         android:id="@+id/new_travel_deal"
         android:orderInCategory="10"
-        android:title="New travel deal"
+        android:title="@string/new_travel_deal"
         app:showAsAction="never"/>
     <item
         android:id="@+id/logout"
         android:orderInCategory="10"
-        android:title="Logout"
+        android:title="@string/logout"
         app:showAsAction="never"/>
 </menu>

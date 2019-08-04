@@ -1,9 +1,12 @@
-package com.dowy.travelmantics
+package com.dowy.travelmantics.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dowy.travelmantics.repository.TravelDealRepository
+import com.dowy.travelmantics.model.TravelDeal
+import com.dowy.travelmantics.utils.VIEWMODEL_TAG
 import java.util.ArrayList
 
 class TravelDealViewModel : ViewModel() {
@@ -76,7 +79,7 @@ class TravelDealViewModel : ViewModel() {
     /**
      * Delete TravelDeal's Image
      */
-    fun deleteTravelDealImage(travelDeal: TravelDeal) {
+    private fun deleteTravelDealImage(travelDeal: TravelDeal) {
         repository.deleteTravelDealImage(travelDeal).addOnFailureListener {
             Log.d(VIEWMODEL_TAG, "Error deleting TravelDeal's Image: $it")
         }

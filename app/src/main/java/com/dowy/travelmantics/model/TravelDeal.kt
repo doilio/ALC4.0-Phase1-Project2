@@ -1,7 +1,6 @@
-package com.dowy.travelmantics
+package com.dowy.travelmantics.model
 
 import java.io.Serializable
-
 
 data class TravelDeal(
     var title: String,

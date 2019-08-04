@@ -1,13 +1,16 @@
-package com.dowy.travelmantics
+package com.dowy.travelmantics.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.dowy.travelmantics.activity.InsertActivity
+import com.dowy.travelmantics.R
+import com.dowy.travelmantics.model.TravelDeal
+import com.dowy.travelmantics.utils.SELECTED_DEAL
 import com.squareup.picasso.Picasso
 
 class DealAdapter : RecyclerView.Adapter<DealAdapter.MyViewHolder>() {
@@ -22,7 +25,6 @@ class DealAdapter : RecyclerView.Adapter<DealAdapter.MyViewHolder>() {
 
         override fun onClick(view: View?) {
             val position = adapterPosition
-            Log.d("Teste", "Posicao: $position")
             val travelDeal: TravelDeal = deals[position]
             val i = Intent(view!!.context, InsertActivity::class.java)
             i.putExtra(SELECTED_DEAL, travelDeal)

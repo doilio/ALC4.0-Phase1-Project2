@@ -1,11 +1,10 @@
-package com.dowy.travelmantics
+package com.dowy.travelmantics.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
-import android.content.Context
 import android.util.Log
-import androidx.core.app.ActivityCompat.startActivityForResult
+import com.dowy.travelmantics.activity.MainActivity
+import com.dowy.travelmantics.repository.TravelDealRepository
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
@@ -13,7 +12,9 @@ import com.google.firebase.storage.StorageReference
 
 class Utils {
 
-
+    /**
+     * Companion Object to assist with firebase issues.
+     */
     companion object FirebaseUtil {
         private val repository = TravelDealRepository()
         var isAdmin: Boolean = false
@@ -37,6 +38,9 @@ class Utils {
 
         }
 
+        /**
+         * Verifies if user is Admin or Regular user
+         */
         private fun checkAdmin(userId: String) {
             repository.readAdmins(userId).get().addOnSuccessListener { document ->
                 if (document.data != null) {
@@ -53,7 +57,11 @@ class Utils {
             }
         }
 
-        fun signIn(activity: Activity) {
+
+        /**
+         * Signs User into the App using AuthUI
+         */
+        private fun signIn(activity: Activity) {
             // Choose authentication providers
             val providers = arrayListOf(
                 AuthUI.IdpConfig.EmailBuilder().build(),
@@ -77,7 +85,6 @@ class Utils {
         fun detachListener() {
             return mFirebaseAuth.removeAuthStateListener(mAuthStateListener)
         }
-
 
         fun imageRef(): StorageReference {
             val storageReference = FirebaseStorage.getInstance().reference

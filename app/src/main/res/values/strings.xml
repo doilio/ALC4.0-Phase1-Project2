@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Travelmantics</string>
+    <string name="insert_travel_deal">Insert Travel Deal</string>
+    <string name="update_travel_deal">Update Travel Deal</string>
+    <string name="choose_picture">Choose Picture:</string>
+    <string name="you_have_to_save_deal_before_deleting">You have to save the deal before deleting!</string>
+    <string name="user_logged_out">User logged out!</string>
+    <string name="title">Title</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
+    <string name="upload_photo">Upload photo</string>
+    <string name="travel_deal_image">Travel Deal Image</string>
+    <string name="empty_image">Empty Image</string>
+    <string name="travel_deal_list_is_currently_empty">Travel Deal list is currently empty,</string>
+    <string name="logout">Logout</string>
+    <string name="new_travel_deal">New travel deal</string>
+    <string name="save">Save</string>
+    <string name="delete_deal">Delete Deal</string>
 </resources>
