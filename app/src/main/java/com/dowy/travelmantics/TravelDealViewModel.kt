@@ -34,6 +34,7 @@ class TravelDealViewModel : ViewModel() {
             if (firebaseFirestoreException != null) {
                 Log.d(VIEWMODEL_TAG, "Error reading TravelDeal $firebaseFirestoreException")
                 travelDeals.value = null
+                return@addSnapshotListener
             }
 
             val travelDealList = ArrayList<TravelDeal>()
