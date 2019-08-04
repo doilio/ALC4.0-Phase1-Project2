@@ -30,11 +30,18 @@ class TravelDealRepository {
         val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
             .document(travelDeal.id!!)
 
-       return travelDealRef.delete()
+        return travelDealRef.delete()
     }
 
     fun deleteTravelDealImage() {
 
+    }
+
+    fun readAdmins(userId: String): DocumentReference {
+        val admin = firebaseDB.collection(ADMIN)
+
+
+        return admin.document(userId)
     }
 
 }

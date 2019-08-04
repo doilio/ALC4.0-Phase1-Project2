@@ -36,8 +36,23 @@ class InsertActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.save_menu, menu)
+        if (Utils.isAdmin) {
+            menu!!.findItem(R.id.save_menu).setVisible(true)
+            menu.findItem(R.id.delete_deal).setVisible(true)
+            enableInputFields(true)
+        } else {
+            supportActionBar!!.title = "Travel Deals"
+            menu!!.findItem(R.id.save_menu).setVisible(false)
+            menu.findItem(R.id.delete_deal).setVisible(false)
+            enableInputFields(false)
+        }
+        return true
+    }
 
-        return super.onCreateOptionsMenu(menu)
+    fun enableInputFields(enabled: Boolean) {
+        input_title.isEnabled = enabled
+        input_description.isEnabled = enabled
+        input_price.isEnabled = enabled
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

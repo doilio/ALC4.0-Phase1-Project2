@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun loadTravelDeals() {
         adapter = DealAdapter()
         val recyclerView = recycler_deals
@@ -59,7 +58,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        val insertMenu = menu!!.findItem(R.id.new_travel_deal)
+        if (Utils.isAdmin){
+            insertMenu.setVisible(true)
+        }else{
+            insertMenu.setVisible(false)
+        }
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -78,7 +83,6 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 Log.d("MainActivity", "User logged out!")
                 Utils.attachListener()
-                //recreate()
             }
         Utils.detachListener()
     }
@@ -97,5 +101,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         loadTravelDeals()
         Utils.attachListener()
+    }
+
+     fun showMenu() {
+        invalidateOptionsMenu()
     }
 }
