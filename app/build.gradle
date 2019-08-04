@@ -50,5 +50,8 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
 }
 apply plugin: 'com.google.gms.google-services'

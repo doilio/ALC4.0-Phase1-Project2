@@ -67,8 +67,18 @@ class TravelDealViewModel : ViewModel() {
         repository.deleteTravelDeal(travelDeal).addOnFailureListener {
             Log.d(VIEWMODEL_TAG, "Error deleting TravelDeal: $it")
         }.addOnSuccessListener {
-
+            deleteTravelDealImage(travelDeal)
             _logMsg.value = "${travelDeal.title} deleted!"
+        }
+
+    }
+
+    /**
+     * Delete TravelDeal's Image
+     */
+    fun deleteTravelDealImage(travelDeal: TravelDeal) {
+        repository.deleteTravelDealImage(travelDeal).addOnFailureListener {
+            Log.d(VIEWMODEL_TAG, "Error deleting TravelDeal's Image: $it")
         }
 
     }

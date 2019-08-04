@@ -8,7 +8,8 @@ data class TravelDeal(
     var filter_title: String,
     var description: String,
     var price: String,
-    var imageUrl: String
+    var imageUrl: String,
+    var imageName: String
 ) : Serializable {
 
     var id: String? = null
@@ -17,5 +18,5 @@ data class TravelDeal(
                 field = value
         }
 
-    constructor() : this("", "", "", "","")
+    constructor() : this("", "", "", "","","")
 }

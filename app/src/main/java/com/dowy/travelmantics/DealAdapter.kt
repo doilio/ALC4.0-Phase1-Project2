@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class DealAdapter : RecyclerView.Adapter<DealAdapter.MyViewHolder>() {
 
@@ -16,6 +18,7 @@ class DealAdapter : RecyclerView.Adapter<DealAdapter.MyViewHolder>() {
         val textTitle: TextView = itemView.findViewById(R.id.textview_title)
         val textDescription: TextView = itemView.findViewById(R.id.textview_description)
         val textPrice: TextView = itemView.findViewById(R.id.textview_price)
+        val imageDeal: ImageView = itemView.findViewById(R.id.imageView)
 
         override fun onClick(view: View?) {
             val position = adapterPosition
@@ -50,6 +53,15 @@ class DealAdapter : RecyclerView.Adapter<DealAdapter.MyViewHolder>() {
         holder.textTitle.text = currentTravelDeal.title
         holder.textDescription.text = currentTravelDeal.description
         holder.textPrice.text = currentTravelDeal.price
+
+        if(currentTravelDeal.imageUrl.isNotEmpty()){
+            Picasso.get()
+                .load(currentTravelDeal.imageUrl)
+                .placeholder(R.drawable.loading)
+                .fit()
+                .centerCrop()
+                .into(holder.imageDeal)
+        }
     }
 
 

@@ -7,7 +7,7 @@ import com.google.firebase.storage.FirebaseStorage
 class TravelDealRepository {
 
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private val firebaseStorage = FirebaseStorage.getInstance()
+    private val firebaseStorage = FirebaseStorage.getInstance().reference
 
     fun saveTravelDeal(travelDeal: TravelDeal): Task<DocumentReference> {
         val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
@@ -33,15 +33,19 @@ class TravelDealRepository {
         return travelDealRef.delete()
     }
 
-    fun deleteTravelDealImage() {
-
-    }
-
     fun readAdmins(userId: String): DocumentReference {
         val admin = firebaseDB.collection(ADMIN)
 
 
         return admin.document(userId)
+    }
+
+    fun deleteTravelDealImage(travelDeal: TravelDeal): Task<Void> {
+        val imageRef = firebaseStorage
+        .child(DEALS_PICTURES).child(travelDeal.imageName)
+
+
+        return imageRef.delete()
     }
 
 }

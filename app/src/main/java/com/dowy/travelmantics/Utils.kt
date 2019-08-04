@@ -8,6 +8,8 @@ import android.util.Log
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class Utils {
 
@@ -74,6 +76,12 @@ class Utils {
 
         fun detachListener() {
             return mFirebaseAuth.removeAuthStateListener(mAuthStateListener)
+        }
+
+
+        fun imageRef(): StorageReference {
+            val storageReference = FirebaseStorage.getInstance().reference
+            return storageReference.child(DEALS_PICTURES)
         }
     }
 
