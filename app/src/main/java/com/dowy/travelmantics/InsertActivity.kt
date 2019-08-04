@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -113,6 +115,8 @@ class InsertActivity : AppCompatActivity() {
             menu!!.findItem(R.id.save_menu).setVisible(false)
             menu.findItem(R.id.delete_deal).setVisible(false)
             enableInputFields(false)
+            button_upload.visibility = View.INVISIBLE
+
         }
         return true
     }
