@@ -3,6 +3,7 @@ package com.dowy.travelmantics.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.util.Log
+import com.dowy.travelmantics.R
 import com.dowy.travelmantics.activity.MainActivity
 import com.dowy.travelmantics.repository.TravelDealRepository
 import com.firebase.ui.auth.AuthUI
@@ -72,6 +73,7 @@ class Utils {
             activity.startActivityForResult(
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
+                    .setLogo(R.drawable.logo)
                     .setAvailableProviders(providers)
                     .setIsSmartLockEnabled(false)
                     .build(), RC_SIGN_IN
