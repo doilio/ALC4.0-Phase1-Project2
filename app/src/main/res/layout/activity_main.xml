@@ -1,57 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_deals"
-        android:layout_width="@dimen/spacingZero"
-        android:layout_height="@dimen/spacingZero"
-        android:fitsSystemWindows="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+    <data>
 
-    <ImageView
-        android:id="@+id/image_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/spaceBig"
-        android:layout_marginStart="@dimen/spacingSmall"
-        android:layout_marginEnd="@dimen/spacingSmall"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/text_empty"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/empty_travel"
-        android:contentDescription="@string/empty_image"
-        android:visibility="gone"/>
+    </data>
 
-    <TextView
-        android:id="@+id/text_empty"
-        android:layout_width="@dimen/spacingZero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingSmall"
-        android:layout_marginEnd="@dimen/spacingSmall"
-        android:layout_marginTop="@dimen/spacingSmall"
-        android:text="@string/travel_deal_list_is_currently_empty"
-        android:textAlignment="center"
-        android:textSize="@dimen/textRegular"
-        android:visibility="gone"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_empty"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_deals"
+            android:layout_width="@dimen/spacingZero"
+            android:layout_height="@dimen/spacingZero"
+            android:fitsSystemWindows="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/deals_item"
+            tools:visibility="visible"
+            />
+
+        <ImageView
+            android:id="@+id/image_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/spaceBig"
+            android:layout_marginStart="@dimen/spacingSmall"
+            android:layout_marginEnd="@dimen/spacingSmall"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@+id/text_empty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@drawable/empty_travel"
+            android:contentDescription="@string/empty_image"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/text_empty"
+            android:layout_width="@dimen/spacingZero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingSmall"
+            android:layout_marginEnd="@dimen/spacingSmall"
+            android:layout_marginTop="@dimen/spacingSmall"
+            android:text="@string/travel_deal_list_is_currently_empty"
+            android:textAlignment="center"
+            android:textSize="@dimen/textRegular"
+            android:visibility="gone"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_empty"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

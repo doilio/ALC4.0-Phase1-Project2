@@ -10,9 +10,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dowy.travelmantics.R
+import com.dowy.travelmantics.databinding.ActivityInsertBinding
 import com.dowy.travelmantics.viewmodel.TravelDealViewModel
 import com.dowy.travelmantics.model.TravelDeal
 import com.dowy.travelmantics.utils.INSERTACTIVITY_TAG
@@ -23,17 +25,17 @@ import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_insert.*
 
 class InsertActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TravelDealViewModel
     private lateinit var travelDeal: TravelDeal
+    private lateinit var binding: ActivityInsertBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_insert)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_insert)
 
         supportActionBar!!.title = getString(R.string.insert_travel_deal)
 
@@ -47,14 +49,16 @@ class InsertActivity : AppCompatActivity() {
             travelDeal = intent as TravelDeal
 
             supportActionBar!!.title = getString(R.string.update_travel_deal)
-            input_title.setText(travelDeal.title)
-            input_price.setText(travelDeal.price)
-            input_description.setText(travelDeal.description)
+            binding.apply {
+                inputTitle.setText(travelDeal.title)
+                inputPrice.setText(travelDeal.price)
+                inputDescription.setText(travelDeal.description)
+            }
 
             if (travelDeal.imageUrl.isNotEmpty()) {
                 showImage(travelDeal.imageUrl)
             } else {
-                Picasso.get().load(R.drawable.travel_icon).fit().centerCrop().into(image_travel_deal)
+                Picasso.get().load(R.drawable.travel_icon).fit().centerCrop().into(binding.imageTravelDeal)
             }
 
         } else {
@@ -62,7 +66,7 @@ class InsertActivity : AppCompatActivity() {
         }
 
 
-        button_upload.setOnClickListener { openGallery() }
+        binding.buttonUpload.setOnClickListener { openGallery() }
 
     }
 
@@ -71,7 +75,8 @@ class InsertActivity : AppCompatActivity() {
         i.type = "image/jpeg"
         i.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
 
-        startActivityForResult(Intent.createChooser(i, getString(R.string.choose_picture)),
+        startActivityForResult(
+            Intent.createChooser(i, getString(R.string.choose_picture)),
             REQUEST_GALLERY
         )
     }
@@ -120,7 +125,7 @@ class InsertActivity : AppCompatActivity() {
             .placeholder(R.drawable.loading)
             .fit()
             .centerCrop()
-            .into(image_travel_deal)
+            .into(binding.imageTravelDeal)
     }
 
     /**
@@ -137,7 +142,7 @@ class InsertActivity : AppCompatActivity() {
             menu!!.findItem(R.id.save_menu).isVisible = false
             menu.findItem(R.id.delete_deal).isVisible = false
             enableInputFields(false)
-            button_upload.visibility = View.INVISIBLE
+            binding.buttonUpload.visibility = View.INVISIBLE
 
         }
         return true
@@ -147,17 +152,17 @@ class InsertActivity : AppCompatActivity() {
      * Handling TextInputEditText's input options
      */
     private fun enableInputFields(enabled: Boolean) {
-        input_title.isEnabled = enabled
-        input_description.isEnabled = enabled
-        input_price.isEnabled = enabled
+        binding.apply {
+            inputTitle.isEnabled = enabled
+            inputDescription.isEnabled = enabled
+            inputPrice.isEnabled = enabled
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.save_menu ->
-                saveDeal()
-            R.id.delete_deal ->
-                deleteDeal()
+            R.id.save_menu -> saveDeal()
+            R.id.delete_deal -> deleteDeal()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -180,11 +185,13 @@ class InsertActivity : AppCompatActivity() {
      * Method that saves the deal
      */
     private fun saveDeal() {
-        travelDeal.title = input_title.text.toString().trim()
-        travelDeal.price = input_price.text.toString().trim()
-        travelDeal.description = input_description.text.toString().trim()
-        travelDeal.filter_title = travelDeal.title.toLowerCase()
+        binding.apply {
+            travelDeal.title = inputTitle.text.toString().trim()
+            travelDeal.price = inputPrice.text.toString().trim()
+            travelDeal.description = inputDescription.text.toString().trim()
+            travelDeal.filter_title = travelDeal.title.toLowerCase()
 
+        }
         if (travelDeal.id.isNullOrEmpty()) {
             viewModel.saveTravelDeal(travelDeal)
             mostrarMsg()
@@ -200,9 +207,7 @@ class InsertActivity : AppCompatActivity() {
      * Function that receives updates messages from the ViewModel to inform the user what he has done
      */
     private fun mostrarMsg() {
-        viewModel.logMsg.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
+        viewModel.logMsg.observe(this, Observer { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
     }
 
 }
