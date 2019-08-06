@@ -1,77 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/materialCardView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacingSmall"
-    android:clickable="true"
-    android:focusable="true"
-    app:cardElevation="@dimen/spacingSuperSmall"
-    app:cardPreventCornerOverlap="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="travelDeal"
+            type="com.dowy.travelmantics.model.TravelDeal"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:layout_margin="@dimen/spacingSmall"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardElevation="@dimen/spacingSuperSmall"
+        app:cardPreventCornerOverlap="true">
 
-
-        <TextView
-            android:id="@+id/textview_title"
-            android:layout_width="@dimen/spacingZero"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingSmall"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:layout_marginEnd="@dimen/spacingSmall"
-            android:textSize="@dimen/textBig"
-            app:layout_constraintBottom_toTopOf="@+id/textview_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Titulo"/>
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/textview_description"
-            android:layout_width="@dimen/spacingZero"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingSmall"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:layout_marginEnd="@dimen/spacingSmall"
-            android:layout_marginBottom="@dimen/spacingSmall"
-            app:layout_constraintBottom_toTopOf="@+id/textview_price"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/textview_title"
-            tools:text="Description"/>
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/imageSquare"
-            android:layout_height="@dimen/imageSquare"
-            android:contentDescription="@string/travel_deal_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.555"
-            app:srcCompat="@drawable/travel_icon"/>
+            <TextView
+                android:id="@+id/textview_title"
+                android:layout_width="@dimen/spacingZero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacingSmall"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:layout_marginEnd="@dimen/spacingSmall"
+                android:textSize="@dimen/textBig"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintBottom_toTopOf="@+id/textview_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Titulo"/>
 
-        <TextView
-            android:id="@+id/textview_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:layout_marginEnd="@dimen/spacingSmall"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/textRegular"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_description"
-            tools:text="Price"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textview_description"
+                android:layout_width="@dimen/spacingZero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacingSmall"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:layout_marginEnd="@dimen/spacingSmall"
+                android:layout_marginBottom="@dimen/spacingSmall"
+                android:maxLines="4"
+                android:ellipsize="end"
+                app:layout_constraintBottom_toTopOf="@+id/textview_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/textview_title"
+                tools:text="Description"/>
 
-</com.google.android.material.card.MaterialCardView>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/imageSquare"
+                android:layout_height="@dimen/imageSquare"
+                android:contentDescription="@string/travel_deal_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.555"
+                app:srcCompat="@drawable/travel_icon"
+                app:travelDealImage="@{travelDeal}"/>
+
+            <TextView
+                android:id="@+id/textview_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:layout_marginEnd="@dimen/spacingSmall"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/textRegular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textview_description"
+                tools:text="Price"
+                app:travelDealPrice="@{travelDeal}"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

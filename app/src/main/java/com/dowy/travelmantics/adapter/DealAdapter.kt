@@ -1,69 +1,57 @@
 package com.dowy.travelmantics.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dowy.travelmantics.activity.InsertActivity
-import com.dowy.travelmantics.R
+import com.dowy.travelmantics.adapter.DealAdapter.MyViewHolder.Companion.from
+import com.dowy.travelmantics.databinding.DealsItemBinding
 import com.dowy.travelmantics.model.TravelDeal
-import com.dowy.travelmantics.utils.SELECTED_DEAL
-import com.squareup.picasso.Picasso
 
-class DealAdapter : RecyclerView.Adapter<DealAdapter.MyViewHolder>() {
+class DealAdapter : ListAdapter<TravelDeal, DealAdapter.MyViewHolder>(TravelDealDiffCallBack()) {
 
-    private var deals = emptyList<TravelDeal>()
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val textTitle: TextView = itemView.findViewById(R.id.textview_title)
-        val textDescription: TextView = itemView.findViewById(R.id.textview_description)
-        val textPrice: TextView = itemView.findViewById(R.id.textview_price)
-        val imageDeal: ImageView = itemView.findViewById(R.id.imageView)
+    class MyViewHolder private constructor(val binding: DealsItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        override fun onClick(view: View?) {
-            val position = adapterPosition
-            val travelDeal: TravelDeal = deals[position]
-            val i = Intent(view!!.context, InsertActivity::class.java)
-            i.putExtra(SELECTED_DEAL, travelDeal)
-            view.context.startActivity(i)
+        fun bind(currentTravelDeal: TravelDeal) {
+            binding.apply {
+                textviewTitle.text = currentTravelDeal.title
+                textviewDescription.text = currentTravelDeal.description
+
+                travelDeal = currentTravelDeal
+                executePendingBindings()
+            }
+
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): MyViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = DealsItemBinding.inflate(layoutInflater, parent, false)
+                return MyViewHolder(binding)
+            }
         }
     }
 
-    internal fun setDeals(deals: List<TravelDeal>) {
-        this.deals = deals
-        notifyDataSetChanged()
+    class TravelDealDiffCallBack : DiffUtil.ItemCallback<TravelDeal>() {
+        override fun areItemsTheSame(oldItem: TravelDeal, newItem: TravelDeal): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: TravelDeal, newItem: TravelDeal): Boolean {
+            return oldItem == newItem
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.deals_item, parent, false)
-        return MyViewHolder(itemView)
-    }
-
-    override fun getItemCount(): Int {
-        return deals.size
+        return from(parent)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentTravelDeal = deals[position]
-
-        holder.itemView.setOnClickListener {
-            holder.onClick(holder.itemView)
-        }
-        holder.textTitle.text = currentTravelDeal.title
-        holder.textDescription.text = currentTravelDeal.description
-        holder.textPrice.text = currentTravelDeal.price
-
-        if(currentTravelDeal.imageUrl.isNotEmpty()){
-            Picasso.get()
-                .load(currentTravelDeal.imageUrl)
-                .placeholder(R.drawable.loading)
-                .fit()
-                .centerCrop()
-                .into(holder.imageDeal)
-        }
+        val currentTravelDeal = getItem(position)
+        holder.bind(currentTravelDeal)
     }
 
 

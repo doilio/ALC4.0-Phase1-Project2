@@ -40,15 +40,15 @@ class MainActivity : AppCompatActivity() {
      */
     private fun loadTravelDeals() {
         adapter = DealAdapter()
-        //val recyclerView = recycler_deals
 
         viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
         viewModel.readTravelDeal().observe(this, Observer {
             if (it.isNullOrEmpty()) {
                 showEmptyLayout()
             } else {
-                adapter.setDeals(it)
+                //adapter.setDeals(it)
                 hideEmptyLayout()
+                adapter.submitList(it)
             }
         })
         binding.recyclerDeals.adapter = adapter
