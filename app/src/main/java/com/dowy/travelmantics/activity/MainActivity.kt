@@ -7,25 +7,26 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dowy.travelmantics.R
 import com.dowy.travelmantics.viewmodel.TravelDealViewModel
 import com.dowy.travelmantics.adapter.DealAdapter
+import com.dowy.travelmantics.databinding.ActivityMainBinding
 import com.dowy.travelmantics.utils.MAINACTIVITY_TAG
 import com.dowy.travelmantics.utils.Utils
 import com.firebase.ui.auth.AuthUI
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TravelDealViewModel
     private lateinit var adapter: DealAdapter
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         // This is important so that we can make the interaction between
         // Utils and MainActivity.class
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun loadTravelDeals() {
         adapter = DealAdapter()
-        val recyclerView = recycler_deals
+        //val recyclerView = recycler_deals
 
         viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
         viewModel.readTravelDeal().observe(this, Observer {
@@ -50,26 +51,29 @@ class MainActivity : AppCompatActivity() {
                 hideEmptyLayout()
             }
         })
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerDeals.adapter = adapter
     }
 
     /**
      *  Shows Travel Deals
      */
     private fun hideEmptyLayout() {
-        image_empty.visibility = View.GONE
-        text_empty.visibility = View.GONE
-        recycler_deals.visibility = View.VISIBLE
+        binding.apply {
+            imageEmpty.visibility = View.GONE
+            textEmpty.visibility = View.GONE
+            recyclerDeals.visibility = View.VISIBLE
+        }
     }
 
     /**
      *  Shows a special layout when there are no Travel Deals
      */
     private fun showEmptyLayout() {
-        image_empty.visibility = View.VISIBLE
-        text_empty.visibility = View.VISIBLE
-        recycler_deals.visibility = View.GONE
+        binding.apply {
+            imageEmpty.visibility = View.VISIBLE
+            textEmpty.visibility = View.VISIBLE
+            recyclerDeals.visibility = View.GONE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -81,10 +85,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.new_travel_deal ->
-                openInsertActivity()
-            R.id.logout ->
-                logout()
+            R.id.new_travel_deal -> openInsertActivity()
+            R.id.logout -> logout()
         }
         return super.onOptionsItemSelected(item)
     }
