@@ -1,5 +1,6 @@
 package com.dowy.travelmantics.utils
 
+
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -20,6 +21,7 @@ fun ImageView.setTravelDealImage(item: TravelDeal?) {
             .into(imageView)
     }
 }
+
 
 @BindingAdapter("travelDealPrice")
 fun TextView.setDollarSign(item: TravelDeal?) {

@@ -1,6 +1,5 @@
 package com.dowy.travelmantics.viewmodel
 
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

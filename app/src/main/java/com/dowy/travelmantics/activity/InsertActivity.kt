@@ -37,7 +37,7 @@ class InsertActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_insert)
 
-        supportActionBar!!.title = getString(R.string.insert_travel_deal)
+        supportActionBar?.title = getString(R.string.insert_travel_deal)
 
         viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
 
@@ -48,7 +48,7 @@ class InsertActivity : AppCompatActivity() {
         if (intent != null) {
             travelDeal = intent as TravelDeal
 
-            supportActionBar!!.title = getString(R.string.update_travel_deal)
+            supportActionBar?.title = getString(R.string.update_travel_deal)
             binding.apply {
                 inputTitle.setText(travelDeal.title)
                 inputPrice.setText(travelDeal.price)
@@ -138,7 +138,7 @@ class InsertActivity : AppCompatActivity() {
             menu.findItem(R.id.delete_deal).isVisible = true
             enableInputFields(true)
         } else {
-            supportActionBar!!.title = "Travel Deals"
+            supportActionBar?.title = "Travel Deals"
             menu!!.findItem(R.id.save_menu).isVisible = false
             menu.findItem(R.id.delete_deal).isVisible = false
             enableInputFields(false)

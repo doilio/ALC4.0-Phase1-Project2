@@ -13,9 +13,10 @@ data class TravelDeal(
 
     var id: String? = null
         set(value) {
-            if (value != "")
+            if (value != "") {
                 field = value
+            }
         }
 
-    constructor() : this("", "", "", "","","")
+    constructor() : this( "", "", "", "", "", "")
 }

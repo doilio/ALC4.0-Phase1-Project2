@@ -45,10 +45,9 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
 
         adapter = DealAdapter(TravelDealListener { travelDeal->
-            Toast.makeText(this, travelDeal.title, Toast.LENGTH_SHORT).show()
             viewModel.onTravelDealClicked(travelDeal)
-
         })
+
         viewModel.navigateToInsertActivity.observe(this, Observer {travelDeal ->
             travelDeal?.let {
                 val i = Intent(this, InsertActivity::class.java)

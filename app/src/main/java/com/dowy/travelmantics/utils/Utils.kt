@@ -27,12 +27,12 @@ class Utils {
             activity = act
         }
 
-        private var mFirebaseAuth = FirebaseAuth.getInstance()
-        private var mAuthStateListener = FirebaseAuth.AuthStateListener {
+        private var firebaseAuth = FirebaseAuth.getInstance()
+        private var authStateListener = FirebaseAuth.AuthStateListener {
             if (it.currentUser == null) {
                 signIn(activity)
             } else {
-                val userId = mFirebaseAuth.currentUser!!.uid
+                val userId = firebaseAuth.currentUser!!.uid
                 Log.d("Utils", userId)
                 checkAdmin(userId)
             }
@@ -81,11 +81,11 @@ class Utils {
         }
 
         fun attachListener() {
-            return mFirebaseAuth.addAuthStateListener(mAuthStateListener)
+            return firebaseAuth.addAuthStateListener(authStateListener)
         }
 
         fun detachListener() {
-            return mFirebaseAuth.removeAuthStateListener(mAuthStateListener)
+            return firebaseAuth.removeAuthStateListener(authStateListener)
         }
 
         fun imageRef(): StorageReference {
