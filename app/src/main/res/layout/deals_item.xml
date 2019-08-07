@@ -4,9 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="travelDeal"
             type="com.dowy.travelmantics.model.TravelDeal"/>
+
+        <variable
+            name="clickListener"
+            type="com.dowy.travelmantics.adapter.DealAdapter.TravelDealListener"/>
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -17,7 +22,8 @@
         android:clickable="true"
         android:focusable="true"
         app:cardElevation="@dimen/spacingSuperSmall"
-        app:cardPreventCornerOverlap="true">
+        app:cardPreventCornerOverlap="true"
+        android:onClick="@{() -> clickListener.onClick(travelDeal)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,9 +37,9 @@
                 android:layout_marginStart="@dimen/spacingSmall"
                 android:layout_marginTop="@dimen/spacingSmall"
                 android:layout_marginEnd="@dimen/spacingSmall"
-                android:textSize="@dimen/textBig"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/textBig"
                 app:layout_constraintBottom_toTopOf="@+id/textview_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -50,11 +56,11 @@
                 android:layout_marginTop="@dimen/spacingSmall"
                 android:layout_marginEnd="@dimen/spacingSmall"
                 android:layout_marginBottom="@dimen/spacingSmall"
+                android:ellipsize="end"
+                android:maxLines="4"
                 app:layout_constraintBottom_toTopOf="@+id/textview_price"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                android:maxLines="4"
-                android:ellipsize="end"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/textview_title"
                 tools:text="Description"/>
@@ -82,8 +88,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textview_description"
-                tools:text="Price"
-                app:travelDealPrice="@{travelDeal}"/>
+                app:travelDealPrice="@{travelDeal}"
+                tools:text="Price"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

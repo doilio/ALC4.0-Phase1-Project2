@@ -10,8 +10,8 @@ import kotlinx.android.synthetic.main.deals_item.view.*
 import java.text.DecimalFormat
 
 @BindingAdapter("travelDealImage")
-fun ImageView.setTravelDealImage(item: TravelDeal) {
-    if (item.imageUrl.isNotEmpty()) {
+fun ImageView.setTravelDealImage(item: TravelDeal?) {
+    if (item?.imageUrl!!.isNotEmpty()) {
         Picasso.get()
             .load(item.imageUrl)
             .placeholder(R.drawable.loading)
@@ -22,8 +22,8 @@ fun ImageView.setTravelDealImage(item: TravelDeal) {
 }
 
 @BindingAdapter("travelDealPrice")
-fun TextView.setDollarSign(item: TravelDeal) {
-    if (item.price.isNotEmpty()) {
+fun TextView.setDollarSign(item: TravelDeal?) {
+    if (item?.price!!.isNotEmpty()) {
         //textview_price.text = "${item.price}$"
         val dec = DecimalFormat("#,###.00")
         val priceDouble = item.price.toDouble()

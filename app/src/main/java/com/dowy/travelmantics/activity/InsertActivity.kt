@@ -210,4 +210,9 @@ class InsertActivity : AppCompatActivity() {
         viewModel.logMsg.observe(this, Observer { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
 }

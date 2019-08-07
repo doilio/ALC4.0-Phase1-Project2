@@ -1,5 +1,6 @@
 package com.dowy.travelmantics.viewmodel
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +14,11 @@ class TravelDealViewModel : ViewModel() {
 
     private val repository = TravelDealRepository()
     private val travelDeals = MutableLiveData<List<TravelDeal>>()
-    private val _logMsg = MutableLiveData<String>()
+    private val _navigateToInsertActivity = MutableLiveData<TravelDeal>()
+    val navigateToInsertActivity: LiveData<TravelDeal>
+        get() = _navigateToInsertActivity
+
+    val _logMsg = MutableLiveData<String>()
     val logMsg: LiveData<String>
         get() = _logMsg
 
@@ -86,6 +91,14 @@ class TravelDealViewModel : ViewModel() {
             Log.d(VIEWMODEL_TAG, "Error deleting TravelDeal's Image: $it")
         }
 
+    }
+
+    fun onTravelDealClicked(travelDeal: TravelDeal?) {
+        _navigateToInsertActivity.value = travelDeal
+    }
+
+    fun onInsertActivityNavigated() {
+        _navigateToInsertActivity.value = null
     }
 }
 

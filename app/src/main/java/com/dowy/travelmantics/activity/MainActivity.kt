@@ -7,14 +7,17 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dowy.travelmantics.R
-import com.dowy.travelmantics.viewmodel.TravelDealViewModel
 import com.dowy.travelmantics.adapter.DealAdapter
+import com.dowy.travelmantics.viewmodel.TravelDealViewModel
+import com.dowy.travelmantics.adapter.DealAdapter.*
 import com.dowy.travelmantics.databinding.ActivityMainBinding
 import com.dowy.travelmantics.utils.MAINACTIVITY_TAG
+import com.dowy.travelmantics.utils.SELECTED_DEAL
 import com.dowy.travelmantics.utils.Utils
 import com.firebase.ui.auth.AuthUI
 
@@ -39,9 +42,22 @@ class MainActivity : AppCompatActivity() {
      * Data and populate it accordingly
      */
     private fun loadTravelDeals() {
-        adapter = DealAdapter()
-
         viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
+
+        adapter = DealAdapter(TravelDealListener { travelDeal->
+            Toast.makeText(this, travelDeal.title, Toast.LENGTH_SHORT).show()
+            viewModel.onTravelDealClicked(travelDeal)
+
+        })
+        viewModel.navigateToInsertActivity.observe(this, Observer {travelDeal ->
+            travelDeal?.let {
+                val i = Intent(this, InsertActivity::class.java)
+                i.putExtra(SELECTED_DEAL, travelDeal)
+                startActivity(i)
+                viewModel.onInsertActivityNavigated()
+            }
+        })
+
         viewModel.readTravelDeal().observe(this, Observer {
             if (it.isNullOrEmpty()) {
                 showEmptyLayout()
