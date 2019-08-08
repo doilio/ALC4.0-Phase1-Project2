@@ -17,15 +17,14 @@ All data and pictures are stored using Firebase's Firestore and Firebase Storage
 
 ### Regular user side
 
-![2](https://user-images.githubusercontent.com/38020305/62431006-f1cd1b00-b723-11e9-832e-d1cf1a8442d1.png)
-![3](https://user-images.githubusercontent.com/38020305/62431007-f265b180-b723-11e9-93f4-927971c06c9a.png)
-![4](https://user-images.githubusercontent.com/38020305/62431008-f265b180-b723-11e9-925b-b47b1969460b.png)
-![5](https://user-images.githubusercontent.com/38020305/62431009-f2fe4800-b723-11e9-9cf7-85fb0b49a649.png)
-![6](https://user-images.githubusercontent.com/38020305/62431011-f396de80-b723-11e9-9eac-a8687ce579e7.png)
+![1](https://user-images.githubusercontent.com/38020305/62665882-343f6380-b981-11e9-9795-5da4bccd51bb.png)
+![2](https://user-images.githubusercontent.com/38020305/62665887-3a354480-b981-11e9-802d-ac91b0af6aae.png)
+![4](https://user-images.githubusercontent.com/38020305/62665891-3bff0800-b981-11e9-8102-8fe0eef1bcec.png)
+![5](https://user-images.githubusercontent.com/38020305/62665893-3e616200-b981-11e9-8c1d-37aa68887993.png)
 
 ### Administrator side
 
-![9](https://user-images.githubusercontent.com/38020305/62431040-2c36b800-b724-11e9-9655-8cd9b3d9e9e9.png)
+![1serv](https://user-images.githubusercontent.com/38020305/62665974-add75180-b981-11e9-94b2-575aa0a18bff.png)
 ![10](https://user-images.githubusercontent.com/38020305/62431041-2ccf4e80-b724-11e9-9517-63ecfa306ba9.png)
 ![11](https://user-images.githubusercontent.com/38020305/62431042-2d67e500-b724-11e9-850e-8bb4e4ad1ed7.png)
 
