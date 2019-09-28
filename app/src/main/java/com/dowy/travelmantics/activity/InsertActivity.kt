@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class InsertActivity : AppCompatActivity() {
 
@@ -171,7 +172,7 @@ class InsertActivity : AppCompatActivity() {
      * Method that deletes the deal
      */
     private fun deleteDeal() {
-        if (travelDeal.id.isNullOrEmpty()) {
+        if (travelDeal.id.isEmpty()) {
             Toast.makeText(this, getString(R.string.you_have_to_save_deal_before_deleting), Toast.LENGTH_SHORT).show()
         } else {
             viewModel.deleteTravelDeal(travelDeal)
@@ -189,10 +190,10 @@ class InsertActivity : AppCompatActivity() {
             travelDeal.title = inputTitle.text.toString().trim()
             travelDeal.price = inputPrice.text.toString().trim()
             travelDeal.description = inputDescription.text.toString().trim()
-            travelDeal.filter_title = travelDeal.title.toLowerCase()
+            travelDeal.filter_title = travelDeal.title.toLowerCase(Locale.getDefault())
 
         }
-        if (travelDeal.id.isNullOrEmpty()) {
+        if (travelDeal.id.isEmpty()) {
             viewModel.saveTravelDeal(travelDeal)
             mostrarMsg()
             finish()

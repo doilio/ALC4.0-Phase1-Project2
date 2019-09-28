@@ -17,7 +17,7 @@ class TravelDealViewModel : ViewModel() {
     val navigateToInsertActivity: LiveData<TravelDeal>
         get() = _navigateToInsertActivity
 
-    val _logMsg = MutableLiveData<String>()
+    private val _logMsg = MutableLiveData<String>()
     val logMsg: LiveData<String>
         get() = _logMsg
 

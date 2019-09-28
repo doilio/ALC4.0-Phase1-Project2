@@ -38,7 +38,7 @@ class TravelDealRepository {
      */
     fun updateTravelDeal(travelDeal: TravelDeal): Task<Void> {
         val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
-            .document(travelDeal.id!!)
+            .document(travelDeal.id)
 
         return travelDealRef.set(travelDeal, SetOptions.merge())
     }
@@ -48,7 +48,7 @@ class TravelDealRepository {
      */
     fun deleteTravelDeal(travelDeal: TravelDeal): Task<Void> {
         val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
-            .document(travelDeal.id!!)
+            .document(travelDeal.id)
 
         return travelDealRef.delete()
     }

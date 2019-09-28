@@ -29,7 +29,8 @@ fun TextView.setDollarSign(item: TravelDeal?) {
         //textview_price.text = "${item.price}$"
         val dec = DecimalFormat("#,###.00")
         val priceDouble = item.price.toDouble()
-        textview_price.text =   "${dec.format(priceDouble)}$"
+        //textview_price.text = "${dec.format(priceDouble)}$"
+        textview_price.text = String.format("${dec.format(priceDouble)}$")
     }
 
 }

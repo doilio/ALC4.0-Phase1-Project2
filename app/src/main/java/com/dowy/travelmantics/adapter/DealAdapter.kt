@@ -9,7 +9,7 @@ import com.dowy.travelmantics.adapter.DealAdapter.MyViewHolder.Companion.from
 import com.dowy.travelmantics.databinding.DealsItemBinding
 import com.dowy.travelmantics.model.TravelDeal
 
-class DealAdapter(val clickListener: TravelDealListener) :
+class DealAdapter(private val clickListener: TravelDealListener) :
     ListAdapter<TravelDeal, DealAdapter.MyViewHolder>(TravelDealDiffCallBack()) {
 
 
