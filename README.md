@@ -48,6 +48,4 @@ A stable internet connection.
 
 ## Authors
 
-* **Doilio A. Matsinhe**  - *Contact me on* - [Twitter](https://twitter.com/DoilioMatsinhe)
-* **Doilio A. Matsinhe**  - *Contact me on* - [Instagram](https://www.instagram.com/doiliomatsinhe/)
-* **Doilio A. Matsinhe**  - *Contact me on* - [LinkedIn](https://www.linkedin.com/in/doilio-matsinhe-424570133/)
+* **Doilio A. Matsinhe**  - *Contact me on* - [Twitter](https://twitter.com/DoilioMatsinhe) , [Instagram](https://www.instagram.com/doiliomatsinhe/) , [LinkedIn](https://www.linkedin.com/in/doilio-matsinhe-424570133/)
