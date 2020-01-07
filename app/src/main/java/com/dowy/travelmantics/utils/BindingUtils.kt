@@ -1,13 +1,11 @@
 package com.dowy.travelmantics.utils
 
-
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.dowy.travelmantics.R
 import com.dowy.travelmantics.model.TravelDeal
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.deals_item.view.*
 import java.text.DecimalFormat
 
 @BindingAdapter("travelDealImage")
@@ -18,7 +16,7 @@ fun ImageView.setTravelDealImage(item: TravelDeal?) {
             .placeholder(R.drawable.loading)
             .fit()
             .centerCrop()
-            .into(imageView)
+            .into(this)
     }
 }
 
@@ -30,7 +28,7 @@ fun TextView.setDollarSign(item: TravelDeal?) {
         val dec = DecimalFormat("#,###.00")
         val priceDouble = item.price.toDouble()
         //textview_price.text = "${dec.format(priceDouble)}$"
-        textview_price.text = String.format("${dec.format(priceDouble)}$")
+        text = String.format("${dec.format(priceDouble)}$")
     }
 
 }

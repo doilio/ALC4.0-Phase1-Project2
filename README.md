@@ -1,8 +1,9 @@
-# ALC4.0 Project 2
+ALC4.0 Project 2
+================
 
 ### Travelmantics
 
-This App shows a list of travel deals to various locations, first time you login you are presented with a login screen with two forms of
+This App shows a list of Travel Deals to various locations, first time you login you are presented with a login screen with two forms of
 authentication: Google SignIn & Email and Password.
 
 After the Login two things can happen:
@@ -17,6 +18,8 @@ All data and pictures are stored using Firebase's Firestore and Firebase Storage
 
 ### Regular user side
 
+A regular user only has READ authorization, he can view the Travel Deals.
+
 ![1](https://user-images.githubusercontent.com/38020305/62665882-343f6380-b981-11e9-9795-5da4bccd51bb.png)
 ![2](https://user-images.githubusercontent.com/38020305/62665887-3a354480-b981-11e9-802d-ac91b0af6aae.png)
 ![4](https://user-images.githubusercontent.com/38020305/62665891-3bff0800-b981-11e9-8102-8fe0eef1bcec.png)
@@ -24,7 +27,9 @@ All data and pictures are stored using Firebase's Firestore and Firebase Storage
 
 ### Administrator side
 
-![1serv](https://user-images.githubusercontent.com/38020305/62665974-add75180-b981-11e9-94b2-575aa0a18bff.png)
+The Administratod has authorization to perform CRUD on all of the Travel Deals.
+
+![6](https://user-images.githubusercontent.com/38020305/62665974-add75180-b981-11e9-94b2-575aa0a18bff.png)
 ![10](https://user-images.githubusercontent.com/38020305/62431041-2ccf4e80-b724-11e9-9517-63ecfa306ba9.png)
 ![11](https://user-images.githubusercontent.com/38020305/62431042-2d67e500-b724-11e9-850e-8bb4e4ad1ed7.png)
 

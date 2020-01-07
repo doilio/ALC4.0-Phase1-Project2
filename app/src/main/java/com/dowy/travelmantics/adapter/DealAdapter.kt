@@ -13,20 +13,16 @@ class DealAdapter(private val clickListener: TravelDealListener) :
     ListAdapter<TravelDeal, DealAdapter.MyViewHolder>(TravelDealDiffCallBack()) {
 
 
-    class MyViewHolder private constructor(val binding: DealsItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder private constructor(private val binding: DealsItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(currentTravelDeal: TravelDeal, clickListener: TravelDealListener) {
             binding.apply {
                 textviewTitle.text = currentTravelDeal.title
                 textviewDescription.text = currentTravelDeal.description
-                binding.clickListener = clickListener
                 travelDeal = currentTravelDeal
-                binding.root.setOnClickListener {
-
-                }
+                binding.clickListener = clickListener
                 executePendingBindings()
             }
-
 
         }
 

@@ -15,16 +15,20 @@ import com.dowy.travelmantics.adapter.DealAdapter
 import com.dowy.travelmantics.viewmodel.TravelDealViewModel
 import com.dowy.travelmantics.adapter.DealAdapter.*
 import com.dowy.travelmantics.databinding.ActivityMainBinding
+import com.dowy.travelmantics.repository.TravelDealRepository
 import com.dowy.travelmantics.utils.MAINACTIVITY_TAG
 import com.dowy.travelmantics.utils.SELECTED_DEAL
 import com.dowy.travelmantics.utils.Utils
+import com.dowy.travelmantics.viewmodel.TravelDealViewModelFactory
 import com.firebase.ui.auth.AuthUI
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TravelDealViewModel
+    private lateinit var viewModelFactory: TravelDealViewModelFactory
     private lateinit var adapter: DealAdapter
     private lateinit var binding: ActivityMainBinding
+    private lateinit var repository: TravelDealRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         // Utils and MainActivity.class
         Utils.setContext(this)
 
+        repository = TravelDealRepository()
+        viewModelFactory = TravelDealViewModelFactory(repository)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(TravelDealViewModel::class.java)
     }
 
     /**
@@ -41,13 +49,12 @@ class MainActivity : AppCompatActivity() {
      * Data and populate it accordingly
      */
     private fun loadTravelDeals() {
-        viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
 
-        adapter = DealAdapter(TravelDealListener { travelDeal->
+        adapter = DealAdapter(TravelDealListener { travelDeal ->
             viewModel.onTravelDealClicked(travelDeal)
         })
 
-        viewModel.navigateToInsertActivity.observe(this, Observer {travelDeal ->
+        viewModel.navigateToInsertActivity.observe(this, Observer { travelDeal ->
             travelDeal?.let {
                 val i = Intent(this, InsertActivity::class.java)
                 i.putExtra(SELECTED_DEAL, travelDeal)

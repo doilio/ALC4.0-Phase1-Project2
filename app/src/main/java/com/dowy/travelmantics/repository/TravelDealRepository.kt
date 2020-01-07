@@ -9,7 +9,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 
-class TravelDealRepository {
+class TravelDealRepository : ITravelDealRepository {
 
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val firebaseStorage = FirebaseStorage.getInstance().reference
@@ -17,7 +17,7 @@ class TravelDealRepository {
     /**
      * Saves the Travel deal to Firebase's Firestore
      */
-    fun saveTravelDeal(travelDeal: TravelDeal): Task<DocumentReference> {
+    override fun saveTravelDeal(travelDeal: TravelDeal): Task<DocumentReference> {
         val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
 
         return travelDealRef.add(travelDeal)
@@ -29,14 +29,14 @@ class TravelDealRepository {
      * firestore's filtering is case sensetive.
      * filter_title is just filter.toLowerCase()
      */
-    fun readTravelDeals(): Query {
+    override fun readTravelDeals(): Query {
         return firebaseDB.collection(TRAVEL_DEALS).orderBy(FILTER_TITLE)
     }
 
     /**
      * Updates the Travel deals on Firebase's Firestore
      */
-    fun updateTravelDeal(travelDeal: TravelDeal): Task<Void> {
+    override fun updateTravelDeal(travelDeal: TravelDeal): Task<Void> {
         val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
             .document(travelDeal.id)
 
@@ -46,7 +46,7 @@ class TravelDealRepository {
     /**
      * Deletes the Travel deals on Firebase's Firestore
      */
-    fun deleteTravelDeal(travelDeal: TravelDeal): Task<Void> {
+    override fun deleteTravelDeal(travelDeal: TravelDeal): Task<Void> {
         val travelDealRef = firebaseDB.collection(TRAVEL_DEALS)
             .document(travelDeal.id)
 
@@ -56,7 +56,7 @@ class TravelDealRepository {
     /**
      * Reads the Admin Collectrion to assist on Authorization functions implemented on this app
      */
-    fun readAdmins(userId: String): DocumentReference {
+    override fun readAdmins(userId: String): DocumentReference {
         val admin = firebaseDB.collection(ADMIN)
 
         return admin.document(userId)
@@ -65,7 +65,7 @@ class TravelDealRepository {
     /**
      * Deletes the Travel deal's image from the storage as soon as the Travel Deal is deleted
      */
-    fun deleteTravelDealImage(travelDeal: TravelDeal): Task<Void> {
+    override fun deleteTravelDealImage(travelDeal: TravelDeal): Task<Void> {
         val imageRef = firebaseStorage
             .child(DEALS_PICTURES).child(travelDeal.imageName)
 

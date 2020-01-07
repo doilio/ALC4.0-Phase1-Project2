@@ -17,10 +17,12 @@ import com.dowy.travelmantics.R
 import com.dowy.travelmantics.databinding.ActivityInsertBinding
 import com.dowy.travelmantics.viewmodel.TravelDealViewModel
 import com.dowy.travelmantics.model.TravelDeal
+import com.dowy.travelmantics.repository.TravelDealRepository
 import com.dowy.travelmantics.utils.INSERTACTIVITY_TAG
 import com.dowy.travelmantics.utils.REQUEST_GALLERY
 import com.dowy.travelmantics.utils.SELECTED_DEAL
 import com.dowy.travelmantics.utils.Utils
+import com.dowy.travelmantics.viewmodel.TravelDealViewModelFactory
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.UploadTask
@@ -30,6 +32,8 @@ import java.util.*
 class InsertActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TravelDealViewModel
+    private lateinit var viewModelFactory: TravelDealViewModelFactory
+    private lateinit var repository: TravelDealRepository
     private lateinit var travelDeal: TravelDeal
     private lateinit var binding: ActivityInsertBinding
 
@@ -40,7 +44,10 @@ class InsertActivity : AppCompatActivity() {
 
         supportActionBar?.title = getString(R.string.insert_travel_deal)
 
-        viewModel = ViewModelProviders.of(this).get(TravelDealViewModel::class.java)
+        repository = TravelDealRepository()
+        viewModelFactory = TravelDealViewModelFactory(repository)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(TravelDealViewModel::class.java)
 
         /**
          * Receiving Intent from the MainActivity with the selected data
@@ -59,7 +66,8 @@ class InsertActivity : AppCompatActivity() {
             if (travelDeal.imageUrl.isNotEmpty()) {
                 showImage(travelDeal.imageUrl)
             } else {
-                Picasso.get().load(R.drawable.travel_icon).fit().centerCrop().into(binding.imageTravelDeal)
+                Picasso.get().load(R.drawable.travel_icon).fit().centerCrop()
+                    .into(binding.imageTravelDeal)
             }
 
         } else {
@@ -173,7 +181,11 @@ class InsertActivity : AppCompatActivity() {
      */
     private fun deleteDeal() {
         if (travelDeal.id.isEmpty()) {
-            Toast.makeText(this, getString(R.string.you_have_to_save_deal_before_deleting), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                getString(R.string.you_have_to_save_deal_before_deleting),
+                Toast.LENGTH_SHORT
+            ).show()
         } else {
             viewModel.deleteTravelDeal(travelDeal)
             mostrarMsg()
@@ -208,7 +220,9 @@ class InsertActivity : AppCompatActivity() {
      * Function that receives updates messages from the ViewModel to inform the user what he has done
      */
     private fun mostrarMsg() {
-        viewModel.logMsg.observe(this, Observer { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
+        viewModel.logMsg.observe(
+            this,
+            Observer { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
     }
 
     override fun onBackPressed() {

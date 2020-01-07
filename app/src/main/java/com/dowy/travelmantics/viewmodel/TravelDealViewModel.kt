@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dowy.travelmantics.repository.TravelDealRepository
 import com.dowy.travelmantics.model.TravelDeal
+import com.dowy.travelmantics.repository.ITravelDealRepository
 import com.dowy.travelmantics.utils.VIEWMODEL_TAG
 import java.util.ArrayList
 
-class TravelDealViewModel : ViewModel() {
+class TravelDealViewModel(private val repository: ITravelDealRepository) : ViewModel() {
 
-    private val repository = TravelDealRepository()
+    //private val repository = TravelDealRepository()
     private val travelDeals = MutableLiveData<List<TravelDeal>>()
     private val _navigateToInsertActivity = MutableLiveData<TravelDeal>()
     val navigateToInsertActivity: LiveData<TravelDeal>

@@ -10,14 +10,4 @@ data class TravelDeal(
     var price: String = "",
     var imageUrl: String = "",
     var imageName: String = ""
-) : Serializable {
-
-//    var id: String? = null
-//        set(value) {
-//            if (value != "") {
-//                field = value
-//            }
-//        }
-//
-//    constructor() : this( "", "", "", "", "", "")
-}
+) : Serializable
